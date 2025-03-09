@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float jumpSpeed;
     [SerializeField] int jumpCount;
 
+    [SerializeField] float maxStamina;
+    [SerializeField] float staminaDrainRate;
+    [SerializeField] float staminaRegenRate;
+    [SerializeField] float sprintThreshold; //this is min stamina needed
+
+    float currentStamina;
     Vector2 lastMoveDirection = Vector2.right;
     Vector2 moveDir;
     Vector2 playerVelocity;
@@ -25,8 +31,8 @@ public class PlayerController : MonoBehaviour {
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
         rb.freezeRotation = true;
+        currentStamina = maxStamina;
     }
     private void Update()
     {
@@ -42,8 +48,7 @@ public class PlayerController : MonoBehaviour {
             jumpCount = 0;
         }*/
         float moveX = Input.GetAxis("Horizontal");
-        //float moveY = Input.GetAxis("Vertical");
-        
+
         // Set movement vector
         moveDir = new Vector2(moveX, 0).normalized;
         if (moveDir != Vector2.zero)
