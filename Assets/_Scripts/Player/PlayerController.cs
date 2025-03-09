@@ -6,10 +6,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
-   //[SerializeField] CharacterController controller;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
-
     [SerializeField] float speed;
     [SerializeField] float sprintMod;
     [SerializeField] float gravity;
@@ -17,19 +15,24 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] float jumpSpeed;
     [SerializeField] int jumpCount;
 
+
     [SerializeField] float maxStamina;
     [SerializeField] float staminaDrainRate;
     [SerializeField] float staminaRegenRate;
     [SerializeField] float sprintThreshold; //this is min stamina needed
 
+    [SerializeField] BoxCollider2D footCollider;
+    [SerializeField] BoxCollider2D activationCollider;
     float currentStamina;
     Vector2 lastMoveDirection = Vector2.right;
     Vector2 moveDir;
     Vector2 playerVelocity;
 
     bool isSprinting;
+    bool canSprint;
     private void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
         currentStamina = maxStamina;
@@ -38,9 +41,18 @@ public class PlayerController : MonoBehaviour {
     {
         movement();
         sprint();
-        
+        if (Input.GetButtonDown("Interact"))
+        {
+            if (activationCollider.IsTouchingLayers(LayerMask.GetMask("Button"))) { 
+                //talk to game, activate gate for opening function.
+            }
+        }
 
     }
+/*    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        jumpCount = 0;
+    }*/
     void movement() { 
 /*    if (controller.isGrounded)
         {
@@ -48,7 +60,6 @@ public class PlayerController : MonoBehaviour {
             jumpCount = 0;
         }*/
         float moveX = Input.GetAxis("Horizontal");
-
         // Set movement vector
         moveDir = new Vector2(moveX, 0).normalized;
         if (moveDir != Vector2.zero)
@@ -56,7 +67,7 @@ public class PlayerController : MonoBehaviour {
             lastMoveDirection = moveDir;
             rb.linearVelocity = new Vector2(moveDir.x * speed, rb.linearVelocity.y);
         }
-        if (!Input.GetButton("Horizontal"))
+        if (!Input.GetButton("Horizontal")&& footCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             rb.linearVelocityX = 0f;
             
@@ -71,36 +82,57 @@ public class PlayerController : MonoBehaviour {
         // Flip sprite on Y-axis based on movement direction
         if (moveX != 0)
         {
-            //spriteRenderer.flipX = moveX < 0;
+            spriteRenderer.flipX = moveX < 0;
         }
-/*        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
-        {
-            jumpCount++;
+        if (footCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))&& rb.linearVelocity.y <=0) {
 
-            playerVelocity.y = jumpSpeed;
-
+            jumpCount = 0;
         }
-        controller.Move(playerVelocity * Time.deltaTime);
-        playerVelocity.y -= gravity * Time.deltaTime;*/
 
     }
 
     void sprint()
     {
-        if (Input.GetButtonDown("Sprint"))
+        if (Input.GetButton("Sprint") && currentStamina > 0 && canSprint)
         {
-            speed += sprintMod;
-            isSprinting = true;
+            if (!isSprinting)
+            {
+                speed *= sprintMod;
+                isSprinting = true;
 
+            }
 
+            currentStamina -= staminaDrainRate * Time.deltaTime;
         }
-        else if (Input.GetButtonUp("Sprint"))
+        else
         {
-            speed /= sprintMod;
-            isSprinting = false;
+            if (isSprinting)
+            {
+                speed /= sprintMod; 
+                isSprinting = false;
+            }
+            //regenerate stamina when not sprinting
+            if (currentStamina < maxStamina)
+            {
+                currentStamina += staminaRegenRate * Time.deltaTime;
+            }
+        }
+
+        //clamp stam stat
+        currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
+
+        //no sprinting when stamina is empty
+        if (currentStamina <= 0)
+        {
+
+
+            canSprint = false;
+        }
+        else if (currentStamina > sprintThreshold)
+        {
+            canSprint = true;
         }
     }
-
 
 }
 
