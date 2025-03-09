@@ -41,17 +41,5 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-<<<<<<< Updated upstream
-=======
-  - name: Sky
-    uniqueID: 1495862193
-    locked: 0
-  - name: Walls
-    uniqueID: 3072209277
-    locked: 0
-  - name: Obstacles
-    uniqueID: 3995280153
-    locked: 0
->>>>>>> Stashed changes
   m_RenderingLayers:
   - Default
