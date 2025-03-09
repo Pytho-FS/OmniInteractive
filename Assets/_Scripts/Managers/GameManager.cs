@@ -42,7 +42,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    public void StartNewGame()
+    {
+        CurrentState = GameState.Playing;
+        SceneManager.LoadScene("SampleScene"); // load into the game
+    }
     public void PauseGame()
     {
         CurrentState = GameState.Paused;
@@ -80,6 +84,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Quitting game...");
         Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 
     public int GetCurrentMiniGame()
