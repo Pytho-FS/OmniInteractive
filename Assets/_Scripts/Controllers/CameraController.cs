@@ -68,7 +68,7 @@ public class CameraController : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        yield return StartCoroutine(SmoothZoom(defaultZoomSize));
+      //  yield return StartCoroutine(SmoothZoom(defaultZoomSize));
     }
 
     private IEnumerator SmoothZoom(float targetSize)
