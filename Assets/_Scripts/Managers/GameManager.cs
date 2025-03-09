@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public enum GameState { Playing, Paused, GameOver, Win }
+    public enum GameState { Menu, Playing, Paused, GameOver, Win }
     public GameState CurrentState { get; private set; } = GameState.Playing;
 
     private int currentMiniGame = 0;
@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        ResumeGame();
+        ShowMenu();
+        //ResumeGame();
     }
     public void StartNextMiniGame()
     {
@@ -41,7 +42,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    public void StartNewGame()
+    {
+        CurrentState = GameState.Playing;
+        SceneManager.LoadScene("SampleScene"); // load into the game
+    }
     public void PauseGame()
     {
         CurrentState = GameState.Paused;
@@ -70,11 +75,18 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
+    public void ShowMenu()
+    {
+        CurrentState = GameState.Menu;
+        Debug.Log("Showing Menu (Placeholder). Implement menu logic here.");
+    }
     public void QuitGame()
     {
         Debug.Log("Quitting game...");
         Application.Quit();
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 
     public int GetCurrentMiniGame()
