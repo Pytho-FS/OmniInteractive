@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public enum GameState { Playing, Paused, GameOver }
+    public enum GameState { Playing, Paused, GameOver, Win }
     public GameState CurrentState { get; private set; } = GameState.Playing;
 
     private void Awake()
@@ -29,13 +29,13 @@ public class GameManager : MonoBehaviour
     public void PauseGame()
     {
         CurrentState = GameState.Paused;
-        Time.timeScale = 0f; // Pause physics and animations
+        Time.timeScale = 0f;
     }
 
     public void ResumeGame()
     {
         CurrentState = GameState.Playing;
-        Time.timeScale = 1f; // Resume game
+        Time.timeScale = 1f;
     }
 
     public void GameOver()
@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
     }
 
+    public void WinGame()
+    {
+        CurrentState = GameState.Win;
+        Debug.Log("Game Win!");
+    }
     public void RestartGame()
     {
         Time.timeScale = 1f;
@@ -54,6 +59,11 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Quitting game...");
         Application.Quit();
+    }
+
+    public void currentMiniGame()
+    {
+
     }
 }
 
