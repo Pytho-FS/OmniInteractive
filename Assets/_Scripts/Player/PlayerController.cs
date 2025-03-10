@@ -4,24 +4,30 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
-
+public class PlayerController : MonoBehaviour
+{
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
+
     [SerializeField] float speed;
     [SerializeField] float sprintMod;
     [SerializeField] float jumpMax;
     [SerializeField] float jumpSpeed;
     [SerializeField] int jumpCount;
-
+    [SerializeField] float acceleration = 10f;
+    [SerializeField] float deceleration = 15f;
+    [SerializeField] float airControl = 0.5f;
+    [SerializeField] float coyoteTime = 0.1f;
+    [SerializeField] float jumpBufferTime = 0.15f;
 
     [SerializeField] float maxStamina;
     [SerializeField] float staminaDrainRate;
     [SerializeField] float staminaRegenRate;
-    [SerializeField] float sprintThreshold; //this is min stamina needed
+    [SerializeField] float sprintThreshold;
 
     [SerializeField] BoxCollider2D footCollider;
     [SerializeField] BoxCollider2D activationCollider;
+
     float currentStamina;
     public float CurrentStamina => currentStamina;
     Vector2 lastMoveDirection = Vector2.right;
@@ -30,6 +36,11 @@ public class PlayerController : MonoBehaviour {
 
     bool isSprinting;
     bool canSprint;
+    float coyoteTimer;
+    float jumpBufferTimer;
+    bool isGrounded;
+    float moveInput;
+
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -38,64 +49,75 @@ public class PlayerController : MonoBehaviour {
         currentStamina = maxStamina;
         rb.linearDamping = 0.0f;
     }
+
     private void Update()
     {
         movement();
         sprint();
         if (Input.GetButtonDown("Interact"))
         {
-            if (activationCollider.IsTouchingLayers(LayerMask.GetMask("Button"))) { 
-                //talk to game, activate gate for opening function.
+            if (activationCollider.IsTouchingLayers(LayerMask.GetMask("Button")))
+            {
+                // Activate gate or interactable
             }
         }
-
     }
-/*    private void OnTriggerEnter2D(Collider2D collision)
+
+    void movement()
     {
-        jumpCount = 0;
-    }*/
-    void movement() { 
-/*    if (controller.isGrounded)
+        moveInput = Input.GetAxis("Horizontal");
+        moveDir = new Vector2(moveInput, 0).normalized;
+        isGrounded = footCollider.IsTouchingLayers(LayerMask.GetMask("Ground"));
+
+        if (isGrounded)
         {
-            playerVelocity = Vector2.zero;
+            coyoteTimer = coyoteTime;
             jumpCount = 0;
-        }*/
-        float moveX = Input.GetAxis("Horizontal");
-        // Set movement vector
-        moveDir = new Vector2(moveX, 0).normalized;
-        if (moveDir != Vector2.zero)
-        {
-            lastMoveDirection = moveDir;
-            rb.linearVelocity = new Vector2(moveDir.x * speed, rb.linearVelocity.y);
         }
-        if (!Input.GetButton("Horizontal")&& footCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        else
+        {
+            coyoteTimer -= Time.deltaTime;
+        }
+
+        float targetSpeed = moveInput * speed;
+        float speedDiff = targetSpeed - rb.linearVelocity.x;
+        float accelRate = isGrounded ? acceleration : acceleration * airControl;
+        float movement = Mathf.Clamp(speedDiff * accelRate * Time.deltaTime, -Mathf.Abs(speedDiff), Mathf.Abs(speedDiff));
+
+        rb.linearVelocityX += movement;
+
+        if (!Input.GetButton("Horizontal") && isGrounded)
         {
             rb.linearVelocityX = 0f;
-            
         }
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+
+        if (Input.GetButtonDown("Jump"))
         {
+            jumpBufferTimer = jumpBufferTime;
+        }
+        else
+        {
+            jumpBufferTimer -= Time.deltaTime;
+        }
+
+        if (jumpBufferTimer > 0 && (jumpCount < jumpMax || coyoteTimer > 0))
+        {
+            rb.linearVelocityY = jumpSpeed;
             jumpCount++;
-            //if horizontal is not pressed, set x velocity to 0 if jumping and grounded
-            if (!Input.GetButton("Horizontal") && footCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
-            {
-                rb.linearVelocityX = 0.0f;
-                rb.angularVelocity = 0f;
-            }
-            
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
-
+            jumpBufferTimer = 0;
+            coyoteTimer = 0;
         }
-        // Flip sprite on Y-axis based on movement direction
-        if (moveX != 0)
+
+        if (Input.GetButtonUp("Jump") && rb.linearVelocityY > 0)
         {
-            spriteRenderer.flipX = moveX < 0;
-        }
-        if (footCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))&& rb.linearVelocity.y <=0) {
-
-            jumpCount = 0;
+            rb.linearVelocityY *= 0.5f;
         }
 
+        // Flip sprite based on movement direction
+        if (moveInput != 0)
+        {
+            spriteRenderer.flipX = moveInput < 0;
+        }
     }
 
     void sprint()
@@ -106,7 +128,6 @@ public class PlayerController : MonoBehaviour {
             {
                 speed *= sprintMod;
                 isSprinting = true;
-
             }
 
             currentStamina -= staminaDrainRate * Time.deltaTime;
@@ -115,24 +136,20 @@ public class PlayerController : MonoBehaviour {
         {
             if (isSprinting)
             {
-                speed /= sprintMod; 
+                speed /= sprintMod;
                 isSprinting = false;
             }
-            //regenerate stamina when not sprinting
+
             if (currentStamina < maxStamina)
             {
                 currentStamina += staminaRegenRate * Time.deltaTime;
             }
         }
 
-        //clamp stam stat
         currentStamina = Mathf.Clamp(currentStamina, 0, maxStamina);
 
-        //no sprinting when stamina is empty
         if (currentStamina <= 0)
         {
-
-
             canSprint = false;
         }
         else if (currentStamina > sprintThreshold)
@@ -140,9 +157,9 @@ public class PlayerController : MonoBehaviour {
             canSprint = true;
         }
     }
+
     public float getVelocity()
     {
         return rb.linearVelocity.x;
     }
 }
-
