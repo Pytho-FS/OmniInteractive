@@ -104,6 +104,7 @@ public class JunglePlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpBufferTimer = jumpBufferTime;
+            AudioManager.Instance.PlayPlayerJump();
         }
         else
         {
