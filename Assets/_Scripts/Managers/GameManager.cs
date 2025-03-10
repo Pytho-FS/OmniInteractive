@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviour
             currentMiniGame++;
             Debug.Log("Starting MiniGame " + currentMiniGame + " of " + totalMiniGames);
 
-            // Move camera before loading scene
-            CameraController.Instance.MoveToMiniGame(currentMiniGame);
+            // Notify CameraController to update position
+            CameraController.Instance.MoveToMiniGame();
         }
         else
         {

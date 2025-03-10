@@ -3,63 +3,79 @@ using UnityEngine;
 
 public class NinjaNPC : MonoBehaviour
 {
-    [SerializeField] GameManager gameManager;
-    [SerializeField] private Vector3 targetPosition;
-    [SerializeField] private float moveSpeed = 2f; 
+    [SerializeField] BoxCollider2D colliderNinja;
+    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] private float waitTime = 1f;
-    private Vector3 startPosition;
+    bool destroying = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        gameManager.totalNinjas++;
+
+        GameManager.Instance.totalNinjas++;
+
+        StartCoroutine(toggleNinja());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (colliderNinja.IsTouchingLayers(LayerMask.GetMask("Player"))&& spriteRenderer.enabled)
+        {
+
+            WasFound();
+        }
     }
     public void WasFound()
     {
-        gameManager.totalNinjas--;
-        Destroy(gameObject);
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision != null)
+        if (!destroying)
         {
-            if (collision.IsTouchingLayers(LayerMask.GetMask("Player")))
-            {
+            destroying = true;
+            GameManager.Instance.totalNinjas--;
+            Destroy(gameObject);
+        }
+    }
+    IEnumerator toggleNinja()
+    {
+        while (true)
+        {
+            spriteRenderer.enabled = true;
+            yield return new WaitForSeconds(waitTime);
+            spriteRenderer.enabled = false;
+            yield return new WaitForSeconds(waitTime+waitTime/2);
 
-                WasFound();
+        }
+    }
+    /*    IEnumerator MoveNinja()
+        {
+            while (true)
+            {
+               // yield return StartCoroutine(LerpPosition(startPosition,targetPosition, moveSpeed));
+               transform.position = Vector3.Lerp(startPosition, targetPosition, 0.3f);
+                yield return new WaitForSeconds(waitTime);
+                //yield return StartCoroutine(LerpPosition(targetPosition,startPosition, moveSpeed));
+                transform.position = Vector3.Lerp(targetPosition, startPosition, 0.3f);
+                yield return new WaitForSeconds(waitTime);
             }
         }
-    }
-    
-    IEnumerator MoveNinja()
-    {
-        // Move to target position
-        yield return StartCoroutine(LerpPosition(targetPosition, moveSpeed));
-
-        // Wait at the position
-        yield return new WaitForSeconds(waitTime);
-
-        // Move back to the start position
-        yield return StartCoroutine(LerpPosition(startPosition, moveSpeed));
-    }
-
-    IEnumerator LerpPosition(Vector3 target, float duration)
-    {
-        float time = 0;
-        Vector3 start = transform.position;
-
-        while (time < duration)
+        IEnumerator toggleNinja()
         {
-            transform.position = Vector3.Lerp(start, target, time / duration);
-            time += Time.deltaTime;
-            yield return null;
-        }
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            yield return new WaitForSeconds(waitTime);
+            gameObject.SetActive(true);
+            yield return new WaitForSeconds(waitTime);
 
-        transform.position = target; // Ensure it snaps exactly to target
-    }
+        }
+        IEnumerator LerpPosition(Vector3 start, Vector3 target,float duration)
+        {
+            float time = 0;
+
+            while (time < duration)
+            {
+                transform.position = Vector3.Lerp(start, target, time/duration);
+                time += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.position = start; // Ensure it snaps exactly to target
+        }*/
 }
