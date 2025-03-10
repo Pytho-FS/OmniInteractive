@@ -24,7 +24,6 @@ public class MainMenuManager : MonoBehaviour
 
     [Header("Needed References")]
     [SerializeField] public GameObject mainMenuPanel;
-    [SerializeField] public GameObject creditsPanel;
     [SerializeField] public GameObject optionsPanel;
 
     [SerializeField] private GameObject parallaxBG;
@@ -55,15 +54,13 @@ public class MainMenuManager : MonoBehaviour
 
         isOnMainMenu = true;
         isOnOptions = false;
-        isOnCredits = false;
         GameManager.Instance.ShowMenu();
 
         mainMenuPanel.SetActive(true);
         optionsPanel.SetActive(false);
-        creditsPanel.SetActive(false);
         parallaxBG.SetActive(true);
 
-        AudioManager.Instance.PlayMainMenuMusic();
+        AudioManager.Instance.PlayBackgroundMusicForScene("Main Menu");
     }
 
     public void OpenOptions()
@@ -78,11 +75,13 @@ public class MainMenuManager : MonoBehaviour
     public void OpenCredits()
     {
         AudioManager.Instance.PlayButtonClick();
+        AudioManager.Instance.StopMusic();
 
         isOnMainMenu = false;
         isOnCredits = true;
+        GameManager.Instance.LoadScene("Credits");
         Debug.Log("Opened Credits!");
-        AudioManager.Instance.StopMusic();
+        AudioManager.Instance.PlayBackgroundMusicForScene("Credits");
     }
 
     public void QuitGameToDesktop()
@@ -118,7 +117,7 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
-        AudioManager.Instance.PlayMainMenuMusic();
+        AudioManager.Instance.PlayBackgroundMusicForScene("Main Menu");
 
         GameManager.Instance.ShowMenu();
         // Check to see if the gamemanager is currently displaying the main menu
@@ -128,7 +127,6 @@ public class MainMenuManager : MonoBehaviour
             isOnMainMenu = true;
             mainMenuPanel.SetActive(true);
             optionsPanel.SetActive(false);
-            creditsPanel.SetActive(false);
             parallaxBG.SetActive(true);
         }
         else
@@ -151,7 +149,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (isOnCredits && Input.GetKeyDown(KeyCode.Escape))
         {
-            OpenMainMenu();
+            GameManager.Instance.LoadScene("Main Menu");
         }
 
         if (isOnOptions)
@@ -159,18 +157,6 @@ public class MainMenuManager : MonoBehaviour
             mainMenuPanel.SetActive(false);
 
             optionsPanel.SetActive(true);
-            creditsPanel.SetActive(false);
-
-            parallaxBG.SetActive(false);
-        }
-
-        if (isOnCredits)
-        {
-            mainMenuPanel.SetActive(false);
-            AudioManager.Instance.StopMusic();
-
-            optionsPanel.SetActive(false);
-            creditsPanel.SetActive(true);
 
             parallaxBG.SetActive(false);
         }

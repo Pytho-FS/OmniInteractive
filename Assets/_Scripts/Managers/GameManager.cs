@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -50,7 +51,21 @@ public class GameManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(LoadSceneAndSetMusic(sceneName));
+    }
+
+    private IEnumerator LoadSceneAndSetMusic(string sceneName)
+    {
+        AsyncOperation asyncOp = SceneManager.LoadSceneAsync(sceneName);
+        while (!asyncOp.isDone)
+        {
+            yield return null;
+        }
+
+        if (sceneName != "Main Menu")
+        {
+            AudioManager.Instance.PlayBackgroundMusicForScene(sceneName);
+        }
     }
 
     public void StartNewGame()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
 
     [SerializeField] private AudioClip mainMenuMusic;
+    [SerializeField] private AudioClip ninjaMusic;
+    [SerializeField] private AudioClip jungleMusic;
+    [SerializeField] private AudioClip fallingMusic;
+    [SerializeField] private AudioClip creditsMusic;
+
 
     [SerializeField] private AudioClip buttonClickSFX;
     [SerializeField] private AudioClip playerJumpSFX;
@@ -17,6 +23,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private float sfxVolume = 1f;
 
     [SerializeField] private float volumeExponent = 2f;
+
+    private float jumpPitchMin = 0.095f;
+    private float jumpPitchMax = 1.05f;
 
     private void Awake()
     {
@@ -33,22 +42,73 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-
-    public void PlayMainMenuMusic()
+    private void OnEnable()
     {
-        if (musicSource != null && mainMenuMusic != null) 
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PlayBackgroundMusicForScene(scene.name);
+    }
+
+    public void PlayBackgroundMusicForScene(string sceneName)
+    {
+        if (musicSource == null)
         {
-            if (!musicSource.isPlaying)
-            {
+            Debug.LogWarning("Music source not assigned.");
+            return;
+        }
+
+        StopMusic();
+
+        switch (sceneName)
+        {
+            case "Main Menu":
+                {
+                    musicSource.clip = mainMenuMusic;
+                    break;
+                }
+            case "Minigame_0":
+                {
+                    musicSource.clip = ninjaMusic;
+                    break;
+                }
+            case "Minigame_1":
+                {
+                    musicSource.clip = jungleMusic;
+                    break;
+                }
+            case "Minigame_2":
+                {
+                    musicSource.clip = fallingMusic;
+                    break;
+                }
+            case "Credits":
+                {
+                    musicSource.clip = creditsMusic;
+                    break;
+                }
+            default:
                 musicSource.clip = mainMenuMusic;
-                musicSource.loop = true;
-                musicSource.volume = musicVolume;
-                musicSource.Play();
-            }
+                break;
+        }
+
+        if (musicSource.clip != null)
+        {
+            musicSource.loop = true;
+            ApplyMusicVolume();
+            musicSource.Play();
         }
         else
         {
-            Debug.LogWarning("Music not assigned.");
+            Debug.LogWarning("No music clip assigned for scene: " + sceneName);
         }
     }
 
@@ -64,7 +124,7 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource != null && clip != null)
         {
-            sfxSource.PlayOneShot(clip, sfxVolume);
+            sfxSource.PlayOneShot(clip, sfxVolumeAdjusted());
         }
     }
 
@@ -75,7 +135,13 @@ public class AudioManager : MonoBehaviour
 
     public void PlayPlayerJump()
     {
-        PlaySFX(playerJumpSFX);
+        if (sfxSource != null && playerJumpSFX != null)
+        {
+            float originalPitch = sfxSource.pitch;
+            sfxSource.pitch = Random.Range(jumpPitchMin, jumpPitchMax);
+            sfxSource.PlayOneShot(playerJumpSFX, sfxVolumeAdjusted());
+            sfxSource.pitch = originalPitch;
+        }
     }
 
     public void SetMusicVolume(float newVolume)
