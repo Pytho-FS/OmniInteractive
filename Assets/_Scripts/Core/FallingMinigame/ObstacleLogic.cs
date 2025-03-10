@@ -9,11 +9,12 @@ public class ObstacleLogic : MonoBehaviour
 
     private Vector3 origPosition;
     private bool isPaused = false;
+    private float origSpeed;
 
     void Start()
     {
-        speed = 0.01f;
         origPosition = transform.position;
+        origSpeed = speed;
     }
 
     // Update is called once per frame
@@ -48,7 +49,7 @@ public class ObstacleLogic : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        speed = 0.01f;
+        speed = origSpeed;
 
         isPaused = false;
     }
