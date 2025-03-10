@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 41a5211a2374f6d4bb354ff3118ace99
+guid: 5fe00522fd939d84fb8848ee80c7f2a3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6656043738166984207
-    second: PixelBird_0
+      213: -143927199204405758
+    second: Lamp_Japan_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PixelBird_0
+      name: Lamp_Japan_0
       rect:
         serializedVersion: 2
-        x: 3799
-        y: 4799
-        width: 1902
-        height: 802
+        x: 3899
+        y: 5799
+        width: 1802
+        height: 1802
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1f108114c7bf0a3a0800000000000000
-      internalID: -6656043738166984207
+      spriteID: 20e87e199faa00ef0800000000000000
+      internalID: -143927199204405758
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      PixelBird_0: -6656043738166984207
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

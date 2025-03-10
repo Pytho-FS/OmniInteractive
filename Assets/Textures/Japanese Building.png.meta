@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Japanese Building_0: 2651855409471696923
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
