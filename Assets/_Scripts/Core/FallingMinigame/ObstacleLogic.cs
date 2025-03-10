@@ -22,7 +22,7 @@ public class ObstacleLogic : MonoBehaviour
     {
         if (speed > 0)
         {
-            this.gameObject.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + speed);
+            this.gameObject.transform.position = new Vector2(this.transform.position.x, this.transform.position.y + speed* Time.deltaTime);
         }
     }
 
@@ -47,7 +47,7 @@ public class ObstacleLogic : MonoBehaviour
 
         GameObject.Find("Sprite-Jumper").GetComponent<PlayerReset>().ResetPosition();
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
 
         speed = origSpeed;
 
