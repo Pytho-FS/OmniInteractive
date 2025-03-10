@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class NinjaPortal : Monobehaviour
+public class NinjaPortal : MonoBehaviour
 {
   
 
@@ -15,7 +15,6 @@ public class NinjaPortal : Monobehaviour
     private void Start()
     {
 
-        PlayPortalEffect();
     }
 
 }
