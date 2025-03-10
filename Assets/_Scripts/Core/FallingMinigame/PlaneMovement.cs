@@ -14,6 +14,6 @@ public class PlaneMovement : MonoBehaviour
     }
     void Update()
     {
-        this.transform.position = new Vector2(this.transform.position.x + speed, transform.position.y + script.Speed());
+        this.transform.position = new Vector3(this.transform.position.x + speed, transform.position.y + script.Speed(), -1);
     }
 }
