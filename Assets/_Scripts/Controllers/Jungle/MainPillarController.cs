@@ -1,5 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controls the main pillar's beam behaviour.
@@ -16,192 +18,75 @@ using UnityEngine;
 /// </summary>
 public class MainPillarController : MonoBehaviour
 {
-    private enum PillarState
-    {
-        WaitingForCrystals, // Waiting for player to collect all crystals.
-        InitialEffect,      // Play Initial particle effect for collecting all crystals.
-        BeamShooting,       // Fire beam upward
-        WaitingForSecondaryPillars, // Waiting for crystals to be placed.
-        PreInteractionEffect,       // Playing a stronger effect.
-        BeamAlignment,      // Player interacts with movement disabled only beam movement
-        Completed,          // Puzzle complete open portal to advance.
-    }
-    [Header("Beam Settings")]
-    public Transform beamStartingPoint;
-    public GameObject beamPrefab;
-    public float beamInterval = 2f;
-
-    [Header("Pillar Targets")]
-    public Transform[] pillarTargets;
-
-    [Header("Portal Settings")]
-    public GameObject portalPrefab;
-
-    public GameObject interactMessage;
-    public int requiredCrystals = 3;
-    public int totalSecondaryPillars = 3;
+    public static MainPillarController Instance {  get; private set; }
 
     [Header("Particle Systems")]
     public ParticleSystem initialEffect;
     public ParticleSystem preInteractionEffect;
 
-    // Internal state variables
-    private PillarState currentState = PillarState.WaitingForCrystals;
-    private float beamTimer = 0f;
-    private int currentSecondaryPillarHits = 0;
-    private bool isPlayerAligning = false;
+    [Header("Portal Prefab")]
+    [SerializeField] public GameObject portalPrefab;
 
+    [Header("Settings")]
+    public int totalTowers = 3;
 
-    private void Update()
+    private int towerDepositCount = 0;
+
+    [Header("Text Fields")]
+    [SerializeField] private TMP_Text initialMsg;
+    [SerializeField] private TMP_Text finalMsg;
+
+    private void Awake()
     {
-        switch (currentState)
-        {
-            case PillarState.WaitingForCrystals:
-                {
-                    // Check if the player has collected all required crystals.
-                    if (CrystalInventoryManager.Instance != null &&
-                        CrystalInventoryManager.Instance.CrystalAmount >= requiredCrystals)
-                    {
-                        // Transition into initial effect.
-                        StartCoroutine(StartInitialEffect());
-                    }
-                    break;
-                }
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
 
-            case PillarState.BeamShooting:
-                {
-                    // Main pillar continuously shoots a beam upward.
-                    beamTimer += Time.deltaTime;
-                    if (beamTimer >= beamInterval)
-                    {
-                        FireBeam(Vector2.up);
-                        beamTimer = 0f;
-                    }
-                    // External logic that tracks when a player has placed crystals on secondary pillars
-                    if (SecondaryPillarsActivated())
-                    {
-                        StartCoroutine(StartPreInteractionEffect());
-                    }
-                    break;
-                }
-
-            case PillarState.BeamAlignment:
-                {
-                    // In BeamAlignment, the player should be prevented from normal movement.
-                    // They can only rotate the beam.
-                    if (isPlayerAligning)
-                    {
-                        float rotationInput = Input.GetAxis("Horizontal");
-                        if (rotationInput != 0)
-                        {
-                            // Rotate the beams direction
-                            Debug.Log("Rotating beam!");
-                        }
-
-                        if (Input.GetKeyDown(KeyCode.E))
-                        {
-                            currentSecondaryPillarHits++;
-                            Debug.Log("Secondary Pillar" + currentSecondaryPillarHits + " aligned!");
-                            if (currentSecondaryPillarHits >= totalSecondaryPillars)
-                            {
-                                CompletePuzzle();
-                            }
-                        }
-                        // Allow exit from alignment with Esc
-                        if (Input.GetKeyDown(KeyCode.Escape))
-                        {
-                            isPlayerAligning = false;
-                            Debug.Log("Exiting alignment mode!");
-                        }
-                    }
-                    break;
-                }
-
-            default:
-                break;
-        }
+        finalMsg.enabled = false;
+        initialMsg.enabled = true;
     }
 
-    /// <summary>
-    /// Instantiate a beam at the beamStartingPoint in the given direction.
-    /// </summary>
-    /// <param name="direction">Normalized direction vector for the beam.</param>
-    private void FireBeam(Vector2 direction)
+    public void PlayInitialEffect()
     {
-        if (beamPrefab == null || beamStartingPoint == null)
-        {
-            Debug.LogWarning("Beam prefab or start point not assigned.");
-            return;
-        }
-        GameObject beamObj = Instantiate(beamPrefab, beamStartingPoint.position, Quaternion.identity);
-        Beam beam = beamObj.GetComponent<Beam>();
-        if (beam != null)
-        {
-            beam.SetDirection(direction);
-        }
-        Destroy(beamObj, 1f);
-    }
-
-    private IEnumerator StartInitialEffect()
-    {
-        Debug.Log("All crystals collected. Playing initial effect.");
-        currentState = PillarState.InitialEffect;
-
         if (initialEffect != null)
         {
             initialEffect.Play();
+            Debug.Log("Initital effect played on main pillar.");
         }
-
-        yield return new WaitForSeconds(2f);
-        currentState = PillarState.BeamShooting;
-        Debug.Log("Initial effect complete. Main pillar now shooting beam upward.");
     }
 
-    private bool SecondaryPillarsActivated()
+    public void OnTowerDeposit()
     {
-        // Check if crystals have been placed
-        if (CrystalInventoryManager.Instance != null && CrystalInventoryManager.Instance.CrystalAmount == 0 && currentState != PillarState.WaitingForCrystals)
+        towerDepositCount++;
+        if (towerDepositCount >= totalTowers)
         {
-            return true;
+            StartCoroutine(PlayPreInteractionEffect());
         }
-
-        return false;
     }
 
-    private IEnumerator StartPreInteractionEffect()
+    private IEnumerator PlayPreInteractionEffect()
     {
-        Debug.Log("All secondary pillars activated. Playing pre-interaction effect.");
-        currentState = PillarState.PreInteractionEffect;
-
+        Debug.Log("All towers have been deposited.");
         if (preInteractionEffect != null)
         {
             preInteractionEffect.Play();
         }
-
         yield return new WaitForSeconds(2f);
-        if (interactMessage != null)
-        {
-            interactMessage.SetActive(true);
-        }
-        currentState = PillarState.BeamAlignment;
-        isPlayerAligning = true;
-    }
-
-    private void CompletePuzzle()
-    {
-        Debug.Log("All secondary pillar aligned. Puzzle Completed!");
-        isPlayerAligning = false;
-        if (interactMessage != null)
-        {
-            interactMessage.SetActive(false);
-        }
-
         if (portalPrefab != null)
         {
             portalPrefab.SetActive(true);
             Debug.Log("Portal enabled!");
         }
 
-        currentState = PillarState.Completed;
+    }
+
+    private void Update()
+    {
+        if (towerDepositCount == totalTowers)
+        {
+            initialMsg.enabled = false;
+            finalMsg.enabled = true;
+        }
     }
 }
