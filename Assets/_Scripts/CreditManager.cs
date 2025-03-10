@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CreditManager : MonoBehaviour
 {
@@ -9,8 +10,11 @@ public class CreditManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.Instance.LoadScene("Main Menu");
+        }
     }
 }
