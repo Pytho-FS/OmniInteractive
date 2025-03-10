@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour {
     SpriteRenderer spriteRenderer;
     [SerializeField] float speed;
     [SerializeField] float sprintMod;
-    [SerializeField] float gravity;
     [SerializeField] float jumpMax;
     [SerializeField] float jumpSpeed;
     [SerializeField] int jumpCount;
@@ -36,6 +35,7 @@ public class PlayerController : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
         currentStamina = maxStamina;
+        rb.linearDamping = 0.0f;
     }
     private void Update()
     {
