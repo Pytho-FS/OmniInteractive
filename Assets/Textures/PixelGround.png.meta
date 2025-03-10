@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1db31506fa8ca5347afc9b4940d80361
+guid: 7fe5596935de574428706436cc7c9538
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2464916743866601435
-    second: Ninja-Background_0
+      213: 2794392168164135490
+    second: PixelGround_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Ninja-Background_0
+      name: PixelGround_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 480
-        height: 270
+        x: 1799
+        y: 3799
+        width: 6702
+        height: 1502
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bdfc41708b4253220800000000000000
-      internalID: 2464916743866601435
+      spriteID: 2429e822fdca7c620800000000000000
+      internalID: 2794392168164135490
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Ninja-Background_0: 2464916743866601435
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -4,6 +4,8 @@ public class PlayerControllerFalling : MonoBehaviour {
 
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
+    Collider2D collider;
+
     [SerializeField] float speed;
     [SerializeField] float gravity;
 
@@ -16,6 +18,7 @@ public class PlayerControllerFalling : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        collider = GetComponent<Collider2D>();
     }
     private void Update()
     {
@@ -37,7 +40,7 @@ public class PlayerControllerFalling : MonoBehaviour {
         // Flip sprite on Y-axis based on movement direction
         if (moveX != 0)
         {
-            spriteRenderer.flipX = moveX < 0;
+            spriteRenderer.flipY = moveX < 0;
         }
     }
 }
