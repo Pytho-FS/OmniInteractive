@@ -71,7 +71,7 @@ public class CameraController : MonoBehaviour
 
         yield return StartCoroutine(SmoothZoom(zoomInSize));
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
 
         GameManager.Instance.LoadScene("Minigame_" + GameManager.Instance.GetCurrentMiniGame());
     }
