@@ -1071,6 +1071,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &671802693644671308
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3397513067925337207, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_Name
+      value: JapanLamp1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397513067925337207, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8207313854251669054, guid: eec13b63917f72b40867d31059762ec7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eec13b63917f72b40867d31059762ec7, type: 3}
 --- !u!1001 &2459189278657693832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1079,6 +1140,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 54024283464877032, guid: 68a1d8d14b515954899658ca6ccd4d8c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7951686737872637543, guid: 68a1d8d14b515954899658ca6ccd4d8c, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -1123,11 +1188,137 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8595385125782579260, guid: 68a1d8d14b515954899658ca6ccd4d8c, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a1d8d14b515954899658ca6ccd4d8c, type: 3}
+--- !u!1001 &5782434150187668194
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5137583861451580251, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_Name
+      value: JapaneseBuilding
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137583861451580251, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.66
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180393450424462936, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 52de5db9b5680454faedd52e421cd94b, type: 3}
+--- !u!1001 &6002372386326112829
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753658408887446333, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557282093662698639, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_Name
+      value: JapanLamp2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4557282093662698639, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ff62ac0b1020f8b4596422bda45f8be5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1140,3 +1331,6 @@ SceneRoots:
   - {fileID: 712370734}
   - {fileID: 710207267}
   - {fileID: 627086610}
+  - {fileID: 671802693644671308}
+  - {fileID: 6002372386326112829}
+  - {fileID: 5782434150187668194}

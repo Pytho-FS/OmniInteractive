@@ -133,6 +133,9 @@ public class PlayerController : MonoBehaviour {
             canSprint = true;
         }
     }
-
+    public float getVelocity()
+    {
+        return rb.linearVelocity.x;
+    }
 }
 
