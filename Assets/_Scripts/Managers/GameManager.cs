@@ -1,3 +1,4 @@
+using System.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
 
     private int currentMiniGame = 0;
     private int totalMiniGames = 3;
+    public int totalNinjas=0;
 
     private void Awake()
     {
