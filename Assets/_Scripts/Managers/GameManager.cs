@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     public void StartNewGame()
     {
         CurrentState = GameState.Playing;
-        SceneManager.LoadScene("SampleScene"); // load into the game
+        SceneManager.LoadScene("Main Scene"); // load into the game
     }
     public void PauseGame()
     {
