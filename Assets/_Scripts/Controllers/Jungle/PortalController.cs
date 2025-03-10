@@ -4,13 +4,14 @@ public class PortalController : MonoBehaviour
 {
     private ParticleSystem portalParticles;
 
-
     public void PlayPortalEffect()
     {
         if (portalParticles != null)
         {
             portalParticles.Play();
             Debug.Log("Initital effect played on main pillar.");
+
+            
         }
     }
 
@@ -26,5 +27,4 @@ public class PortalController : MonoBehaviour
         portalParticles = GetComponent<ParticleSystem>();
         PlayPortalEffect();
     }
-
 }

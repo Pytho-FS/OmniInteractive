@@ -55,5 +55,10 @@ public class PlayerControllerFalling : MonoBehaviour {
         // Invert collider offset only when direction changes
         capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, -capsuleCollider.offset.y);
     }
+
+    public float getVelocity()
+    {
+        return rb.linearVelocity.y;
+    }
 }
 
