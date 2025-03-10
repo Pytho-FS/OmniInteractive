@@ -4,25 +4,6 @@ using UnityEngine;
 public class SmoothOpacity : MonoBehaviour
 {
     [SerializeField] float fadeDuration = 1f;
-
-    //public void FadeDieScreen(float targetAlpha, bool fadeIn)
-    //{
-    //    GameObject dieScreenObj = GameObject.Find("DieScreen");
-
-    //    if (dieScreenObj != null)
-    //    {
-    //        SpriteRenderer sr = dieScreenObj.GetComponent<SpriteRenderer>();
-    //        if (sr != null)
-    //        {
-    //            StopAllCoroutines();
-    //            StartCoroutine(FadeRoutine(sr, targetAlpha, fadeIn));
-    //        }
-    //        else
-    //        {
-    //            Debug.LogWarning($"DieScreen not found!");
-    //        }
-    //    }
-    //}
     public IEnumerator FadeRoutine(SpriteRenderer sr, float targetAlpha, bool fadeIn)
     {
         float startAlpha = sr.color.a;

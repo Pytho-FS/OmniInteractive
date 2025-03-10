@@ -8,6 +8,8 @@ public class ObstacleLogic : MonoBehaviour
     [SerializeField] float speed;
 
     private Vector3 origPosition;
+    private bool isPaused = false;
+
     void Start()
     {
         speed = 0.01f;
@@ -32,6 +34,8 @@ public class ObstacleLogic : MonoBehaviour
 
     private IEnumerator DieScreen()
     {
+        isPaused = true;
+
         speed = 0;
         FadeDieScreen(1f, true);
 
@@ -45,6 +49,8 @@ public class ObstacleLogic : MonoBehaviour
         yield return new WaitForSeconds(1);
 
         speed = 0.01f;
+
+        isPaused = false;
     }
 
     public void FadeDieScreen(float targetAlpha, bool fadeIn)
@@ -66,4 +72,5 @@ public class ObstacleLogic : MonoBehaviour
     }
 
     public float Speed()   { return speed; }
+    public bool IsPaused() { return isPaused; }
 }
