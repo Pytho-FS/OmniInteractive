@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        if (sceneName != "Main Menu")
+        if (sceneName != "MainMenu")
         {
             yield return new WaitForSeconds(3f);
             AudioManager.Instance.PlayBackgroundMusicForScene(sceneName);
@@ -95,6 +95,11 @@ public class GameManager : MonoBehaviour
     public void WinGame()
     {
         CurrentState = GameState.Win;
+
+        if (CurrentState == GameState.Win)
+        {
+            GameManager.Instance.LoadScene("Credits");
+        }
         Debug.Log("Game Win!");
     }
     public void RestartGame()
@@ -124,6 +129,17 @@ public class GameManager : MonoBehaviour
     public void SetCurrentMiniGame(int miniGameIndex)
     {
         currentMiniGame = miniGameIndex;
+    }
+
+    public void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Credits")
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameManager.Instance.QuitGame();
+            }
+        }
     }
 }
 

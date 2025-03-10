@@ -1,30 +1,22 @@
-using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
-/// This script is needed by the Main Menu scene. It gives functionality to the buttons within the scene.
+/// Provides functionality for the Main Menu buttons:
+/// - Starting a new game,
+/// - Opening the Options panel,
+/// - Opening the Credits scene,
+/// - Quitting the game,
+/// - Toggling fullscreen,
+/// - And adjusting volume.
+/// This manager should only be active in the Main Menu scene.
 /// </summary>
 public class MainMenuManager : MonoBehaviour
 {
-    [Header("Bool Parameters")]
-    /*
-     * These are our private listeners that we can visibly see within inspector, and also
-     * assigning these to read-only properties for other scripts to check and interact with.
-    */
-
-    [SerializeField] private bool isOnMainMenu;
-    public bool IsOnMainMenu => isOnMainMenu;
-
-    [SerializeField] private bool isOnCredits;
-    public bool IsOnCredits => isOnCredits;
-
-    [SerializeField] private bool isOnOptions;
-    private bool IsOnOptions => isOnOptions;
-
-    [Header("Needed References")]
-    [SerializeField] public GameObject mainMenuPanel;
-    [SerializeField] public GameObject optionsPanel;
+    [Header("UI Panels")]
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject optionsPanel;
 
     [SerializeField] private GameObject parallaxBG;
 
@@ -32,133 +24,110 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider sfxVolumeSlider;
 
+    private void Awake()
+    {
+        // Only run this manager in the Main Menu scene.
+        if (SceneManager.GetActiveScene().name != "Main Menu")
+        {
+            gameObject.SetActive(false);
+            return;
+        }
 
+        // Show Main Menu UI elements.
+        if (mainMenuPanel != null)
+            mainMenuPanel.SetActive(true);
+        if (optionsPanel != null)
+            optionsPanel.SetActive(false);
+        if (parallaxBG != null)
+            parallaxBG.SetActive(true);
 
-    /*
-     *  Main Menu Button Functionality 
-     *      -   Enables functionality of the new game, options, credits, and quit to desktop buttons.
-    */
+        // Initialize volume sliders if assigned.
+        if (musicVolumeSlider != null)
+            musicVolumeSlider.value = 1f;
+        if (sfxVolumeSlider != null)
+            sfxVolumeSlider.value = 1f;
+    }
+
     public void StartANewGame()
     {
-        if (isOnMainMenu)
-        {
-            AudioManager.Instance.PlayButtonClick();
-
-            GameManager.Instance.StartNewGame();
-        }
+        AudioManager.Instance.PlayButtonClick();
+        GameManager.Instance.StartNewGame();
     }
 
     public void OpenMainMenu()
     {
         AudioManager.Instance.PlayButtonClick();
-
-        isOnMainMenu = true;
-        isOnOptions = false;
         GameManager.Instance.ShowMenu();
 
-        mainMenuPanel.SetActive(true);
-        optionsPanel.SetActive(false);
-        parallaxBG.SetActive(true);
+        if (mainMenuPanel != null)
+            mainMenuPanel.SetActive(true);
+        if (optionsPanel != null)
+            optionsPanel.SetActive(false);
+        if (parallaxBG != null)
+            parallaxBG.SetActive(true);
 
-        AudioManager.Instance.PlayBackgroundMusicForScene("Main Menu");
+        GameManager.Instance.LoadScene("Main Menu");
     }
 
     public void OpenOptions()
     {
         AudioManager.Instance.PlayButtonClick();
-
-        isOnMainMenu = false;
-        isOnOptions = true;
-        Debug.Log("Options button clicked!");
+        if (mainMenuPanel != null)
+            mainMenuPanel.SetActive(false);
+        if (optionsPanel != null)
+            optionsPanel.SetActive(true);
+        if (parallaxBG != null)
+            parallaxBG.SetActive(false);
     }
 
     public void OpenCredits()
     {
         AudioManager.Instance.PlayButtonClick();
-        AudioManager.Instance.StopMusic();
-
-        isOnMainMenu = false;
-        isOnCredits = true;
+        // Load the Credits scene.
         GameManager.Instance.LoadScene("Credits");
-        Debug.Log("Opened Credits!");
-        AudioManager.Instance.PlayBackgroundMusicForScene("Credits");
     }
 
     public void QuitGameToDesktop()
     {
         AudioManager.Instance.PlayButtonClick();
-
-        isOnMainMenu = false;
-        // Quit the Application
         GameManager.Instance.QuitGame();
     }
 
-    /*
-     * This section are the button methods for within the Options panel.
-     * So far only Fullscreen option is available.
-    */
+    /// <summary>
+    /// Fully toggles fullscreen mode.
+    /// </summary>
     public void ToggleFullScreen()
     {
         AudioManager.Instance.PlayButtonClick();
         Screen.fullScreen = !Screen.fullScreen;
-        Debug.Log("FullScreen Toggled!)");
+        Debug.Log("Fullscreen toggled. Now fullscreen: " + Screen.fullScreen);
     }
 
+    /// <summary>
+    /// Called by the Music Volume slider's OnValueChanged event.
+    /// </summary>
     public void OnMusicVolumeChanged(float newValue)
     {
         AudioManager.Instance.SetMusicVolume(newValue);
     }
 
+    /// <summary>
+    /// Called by the SFX Volume slider's OnValueChanged event.
+    /// </summary>
     public void OnSFXVolumeChanged(float newValue)
     {
         AudioManager.Instance.SetSFXVolume(newValue);
     }
 
-
-    private void Awake()
-    {
-        AudioManager.Instance.PlayBackgroundMusicForScene("Main Menu");
-
-        GameManager.Instance.ShowMenu();
-        // Check to see if the gamemanager is currently displaying the main menu
-        // If it is go ahead and display the scene
-        if (GameManager.Instance.CurrentState == GameManager.GameState.Menu)
-        {
-            isOnMainMenu = true;
-            mainMenuPanel.SetActive(true);
-            optionsPanel.SetActive(false);
-            parallaxBG.SetActive(true);
-        }
-        else
-        {
-            isOnMainMenu = false;
-        }
-
-        if (musicVolumeSlider != null)
-        {
-            musicVolumeSlider.value = 1f;
-        }
-
-        if (sfxVolumeSlider != null)
-        {
-            sfxVolumeSlider.value = 1f;
-        }
-    }
-
     private void Update()
     {
-        if (isOnCredits && Input.GetKeyDown(KeyCode.Escape))
+        // In Options mode, ensure Options panel remains visible.
+        if (optionsPanel != null && optionsPanel.activeSelf)
         {
-            GameManager.Instance.LoadScene("Main Menu");
-        }
-
-        if (isOnOptions)
-        {
-            mainMenuPanel.SetActive(false);
-
-            optionsPanel.SetActive(true);
-
-            parallaxBG.SetActive(false);
+            if (mainMenuPanel != null)
+                mainMenuPanel.SetActive(false);
+            if (parallaxBG != null)
+                parallaxBG.SetActive(false);
         }
     }
 }
