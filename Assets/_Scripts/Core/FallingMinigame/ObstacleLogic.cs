@@ -26,6 +26,7 @@ public class ObstacleLogic : MonoBehaviour
     public void OnChildCollision(ObstacleChild child)
     {
         Debug.Log("Player touched obstacle!");
+
         StartCoroutine(DieScreen());
     }
 

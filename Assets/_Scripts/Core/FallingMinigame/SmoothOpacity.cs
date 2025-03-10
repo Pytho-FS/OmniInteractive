@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SmoothOpacity : MonoBehaviour
 {
-    public float fadeDuration = 1f;
+    [SerializeField] float fadeDuration = 1f;
 
     public void FadeDieScreen(float targetAlpha, bool fadeIn)
     {
@@ -23,7 +23,7 @@ public class SmoothOpacity : MonoBehaviour
             }
         }
     }
-    private IEnumerator FadeRoutine(SpriteRenderer sr, float targetAlpha, bool fadeIn)
+    public IEnumerator FadeRoutine(SpriteRenderer sr, float targetAlpha, bool fadeIn)
     {
         float startAlpha = sr.color.a;
         float endAlpha = fadeIn ? targetAlpha : 0f;
