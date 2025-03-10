@@ -7,7 +7,7 @@ public class ObstacleLogic : MonoBehaviour
 
     [SerializeField] float speed;
 
-    private Vector2 origPosition;
+    private Vector3 origPosition;
     void Start()
     {
         speed = 0.01f;
