@@ -10,7 +10,7 @@ public class ObstacleLogic : MonoBehaviour
     private Vector2 origPosition;
     void Start()
     {
-        speed = 0.01f ;
+        speed = 0.01f;
         origPosition = transform.position;
     }
 
@@ -45,4 +45,6 @@ public class ObstacleLogic : MonoBehaviour
 
         speed = 0.01f;
     }
+
+    public float Speed()   { return speed; }
 }
