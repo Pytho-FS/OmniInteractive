@@ -9,14 +9,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Will's Scenes/MainMenu.unity
     guid: 00a06a9e9546759488bb3ecb4a763ac5
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Will's Scenes/Will's Scene 2.unity
-    guid: 77cec40885b2c704ebfcc70778001fd0
-  - enabled: 1
     path: Assets/Scenes/Brandon's Scenes/Main Scene.unity
     guid: 6bdf4fa7b783be14a9823f663a433c5e
+  - enabled: 1
+    path: Assets/Scenes/Will's Scenes/Minigame_2.unity
+    guid: 77cec40885b2c704ebfcc70778001fd0
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
