@@ -4,6 +4,7 @@ using UnityEngine;
 public class NinjaPortal : MonoBehaviour
 {
     [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] ParticleSystem particleSys;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -16,12 +17,14 @@ public class NinjaPortal : MonoBehaviour
     private void Start()
     {
         spriteRenderer.enabled = false;
+
     }
     private void Update()
     {
         if (GameManager.Instance.totalNinjas==0)
         {
             spriteRenderer.enabled = true;
+            
         }
     }
 }

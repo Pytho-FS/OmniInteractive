@@ -57,7 +57,7 @@ public class CameraController : MonoBehaviour
     {
         yield return StartCoroutine(SmoothZoom(zoomOutSize));
 
-        Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.15f, cam.transform.position.z);
+        Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.3f, cam.transform.position.z);
 
         while (Vector2.Distance(new Vector2(cam.transform.position.x, cam.transform.position.y),
                                 new Vector2(targetPosition.x, targetPosition.y)) > 0.1f)
