@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Will's Scenes/Will's Scene.unity
+    path: Assets/Scenes/Will's Scenes/MainMenu.unity
     guid: 00a06a9e9546759488bb3ecb4a763ac5
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity

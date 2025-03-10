@@ -84,9 +84,9 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Quitting game...");
         Application.Quit();
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+#endif
     }
 
     public int GetCurrentMiniGame()
@@ -94,5 +94,6 @@ public class GameManager : MonoBehaviour
         return currentMiniGame;
     }
 }
+
 
 
