@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
 
         if (sceneName != "Main Menu")
         {
+            yield return new WaitForSeconds(3f);
             AudioManager.Instance.PlayBackgroundMusicForScene(sceneName);
         }
     }
