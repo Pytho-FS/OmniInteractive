@@ -104,6 +104,11 @@ public class GameManager : MonoBehaviour
     {
         return currentMiniGame;
     }
+
+    public void SetCurrentMiniGame(int miniGameIndex)
+    {
+        currentMiniGame = miniGameIndex;
+    }
 }
 
 
