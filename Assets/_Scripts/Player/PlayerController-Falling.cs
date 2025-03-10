@@ -4,18 +4,22 @@ public class PlayerControllerFalling : MonoBehaviour {
 
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
+    Collider2D capsuleCollider;
+
     [SerializeField] float speed;
     [SerializeField] float gravity;
 
-    Vector2 lastMoveDirection = Vector2.right;
     Vector2 moveDir;
     Vector2 playerVelocity;
+
+    private bool isFacingLeft = false;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
+        capsuleCollider = GetComponent<Collider2D>();
     }
     private void Update()
     {
@@ -23,22 +27,33 @@ public class PlayerControllerFalling : MonoBehaviour {
     }
 
     void movement() 
-    { 
+    {
         float moveX = Input.GetAxis("Horizontal");
 
-        // Set movement vector
-        moveDir = new Vector2(moveX, 0).normalized;
-        if (moveDir != Vector2.zero)
-        {
-            lastMoveDirection = moveDir;
-            rb.linearVelocity = new Vector2(moveDir.x * speed, rb.linearVelocity.y);
-        }
+        // Apply movement
+        rb.linearVelocity = new Vector2(moveX * speed, rb.linearVelocity.y);
 
-        // Flip sprite on Y-axis based on movement direction
-        if (moveX != 0)
+        // Flip sprite and collider only if direction changes
+
+        if (moveX > 0 && isFacingLeft) // Moving right but facing left
         {
-            spriteRenderer.flipX = moveX < 0;
+            FlipCharacter(false);
         }
+        else if (moveX < 0 && !isFacingLeft) // Moving left but facing right
+        {
+            FlipCharacter(true);
+        }
+    }
+
+    void FlipCharacter(bool faceLeft)
+    {
+        isFacingLeft = faceLeft; // Update facing direction
+
+        // Flip sprite
+        spriteRenderer.flipY = faceLeft;
+
+        // Invert collider offset only when direction changes
+        capsuleCollider.offset = new Vector2(capsuleCollider.offset.x, -capsuleCollider.offset.y);
     }
 }
 
