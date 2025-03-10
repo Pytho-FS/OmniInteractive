@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpSpeed;
     [SerializeField] int jumpCount;
     [SerializeField] float acceleration = 10f;
-    [SerializeField] float deceleration = 15f;
+    //[SerializeField] float deceleration = 15f;
     [SerializeField] float airControl = 0.5f;
     [SerializeField] float coyoteTime = 0.1f;
     [SerializeField] float jumpBufferTime = 0.15f;
