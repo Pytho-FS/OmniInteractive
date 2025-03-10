@@ -24,7 +24,7 @@ public class NinjaNPC : MonoBehaviour
         targetPosition.x = startPosition.x + moveX; 
         targetPosition.y = startPosition.y + moveY;
         targetPosition.z = startPosition.z + moveZ;
-        StartCoroutine(toggleNinja());
+      //  StartCoroutine(toggleNinja());
     }
 
     // Update is called once per frame
@@ -52,7 +52,7 @@ public class NinjaNPC : MonoBehaviour
         }
     }
     
-    IEnumerator MoveNinja()
+/*    IEnumerator MoveNinja()
     {
         while (true)
         {
@@ -84,5 +84,5 @@ public class NinjaNPC : MonoBehaviour
         }
 
         transform.position = start; // Ensure it snaps exactly to target
-    }
+    }*/
 }
