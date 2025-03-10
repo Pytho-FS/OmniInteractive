@@ -8,5 +8,7 @@ public class OnGround : MonoBehaviour
         {
             GameManager.Instance.WinGame();
         }
+
+        GameObject.Find("Obstacles").GetComponent<ObstacleLogic>().Speed(0);
     }
 }

@@ -73,5 +73,7 @@ public class ObstacleLogic : MonoBehaviour
     }
 
     public float Speed()   { return speed; }
+    public void Speed(float val) { speed = val; }
     public bool IsPaused() { return isPaused; }
+    public void IsPaused(bool val) { isPaused = val; }
 }
