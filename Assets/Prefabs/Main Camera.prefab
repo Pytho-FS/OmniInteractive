@@ -53,7 +53,7 @@ MonoBehaviour:
   zoomSpeed: 2
   moveSpeed: 2
   defaultZoomSize: 5
-  zoomInSize: 2
+  zoomInSize: 0.3
   zoomOutSize: 6
 --- !u!20 &3017644242383013330
 Camera:
