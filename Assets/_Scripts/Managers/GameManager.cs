@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     private int currentMiniGame = 0;
     private int totalMiniGames = 3;
-    public int totalNinjas=0;
+    public int totalNinjas = 0;
 
     private void Awake()
     {
@@ -33,10 +33,13 @@ public class GameManager : MonoBehaviour
     }
     public void StartNextMiniGame()
     {
-        if (currentMiniGame < totalMiniGames)
+        if (currentMiniGame < totalMiniGames - 1) 
         {
             currentMiniGame++;
             Debug.Log("Starting MiniGame " + currentMiniGame + " of " + totalMiniGames);
+
+            // Move camera before loading scene
+            CameraController.Instance.MoveToMiniGame(currentMiniGame);
         }
         else
         {
