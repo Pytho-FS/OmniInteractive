@@ -10,7 +10,6 @@ public class CameraController : MonoBehaviour
     public float moveSpeed = 2f;
     public float defaultZoomSize = 5f;
     private Camera cam;
-    private int currentMiniGame = 2;
     public float zoomInSize = 3f;
     public float zoomOutSize = 6f;
 
@@ -31,7 +30,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        MoveToMiniGame(currentMiniGame);
+        MoveToMiniGame();
     }
 
     //For testing purposes
@@ -43,11 +42,12 @@ public class CameraController : MonoBehaviour
         //    NextMiniGame();
         //}
     }
-    public void MoveToMiniGame(int miniGameIndex)
+    public void MoveToMiniGame()
     {
+        int miniGameIndex = GameManager.Instance.GetCurrentMiniGame();
+        
         if (miniGameIndex >= 0 && miniGameIndex < miniGameBubbles.Length)
         {
-            currentMiniGame = miniGameIndex;
             StopAllCoroutines();
             StartCoroutine(SmoothMoveAndLoad(miniGameBubbles[miniGameIndex], miniGameIndex));
         }
@@ -73,7 +73,7 @@ public class CameraController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        GameManager.Instance.LoadScene("Minigame_" + miniGameIndex);
+        GameManager.Instance.LoadScene("Minigame_" + GameManager.Instance.GetCurrentMiniGame());
     }
 
     private IEnumerator SmoothZoom(float targetSize)
@@ -87,12 +87,12 @@ public class CameraController : MonoBehaviour
 
     public void NextMiniGame()
     {
-        currentMiniGame++;
-        if (currentMiniGame >= miniGameBubbles.Length)
-        {
-            currentMiniGame = 0;
-        }
-        MoveToMiniGame(currentMiniGame);
+        //currentMiniGame++;
+        //if (currentMiniGame >= miniGameBubbles.Length)
+        //{
+        //    currentMiniGame = 0;
+        //}
+        //MoveToMiniGame(currentMiniGame);
     }
 }
 

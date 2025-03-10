@@ -35929,11 +35929,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1439254873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b9fee9bfebb5994690ff1c4d312610f, type: 3}
+  m_Script: {fileID: 11500000, guid: fe4a1497d493e874b95032e7ca5ddb4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scrollSpeed: 0.015
-  smoothTime: 0.25
+  scrollSpeed: 0.1
 --- !u!1 &1439255085
 GameObject:
   m_ObjectHideFlags: 0
@@ -52822,7 +52821,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090807029}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 0.1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -52896,9 +52895,9 @@ ParticleSystem:
     enabled: 1
     startLifetime:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 1
-      minScalar: 5
+      minMaxState: 3
+      scalar: 0.1
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -52950,7 +52949,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -53004,7 +53003,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.59607846, g: 0.47058827, b: 0.3254902, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -53068,7 +53067,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.2
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -53392,7 +53391,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.5
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -53445,12 +53444,12 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 17
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
-    donutRadius: 0.2
+    radiusThickness: 0.5
+    donutRadius: 0.002
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
@@ -53516,7 +53515,7 @@ ParticleSystem:
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
-    m_Sprite: {fileID: 0}
+    m_Sprite: {fileID: -7424569323378967374, guid: df80e57c5bd4a4c429b0158132a17704, type: 3}
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
@@ -53532,7 +53531,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.15
       mode: 0
       spread: 0
       speed:
@@ -53589,7 +53588,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 360
+      value: 180
       mode: 0
       spread: 0
       speed:
@@ -53651,7 +53650,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 25
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -53704,7 +53703,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -55466,11 +55465,11 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: -0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -55523,7 +55522,7 @@ ParticleSystem:
     strengthY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -55576,7 +55575,7 @@ ParticleSystem:
     strengthZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -55626,7 +55625,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    separateAxes: 0
+    separateAxes: 1
     frequency: 0.5
     damping: 1
     octaves: 1
@@ -56332,7 +56331,7 @@ ParticleSystem:
     separateAxes: 0
     range: {x: 0, y: 1}
   ColorBySpeedModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -56340,17 +56339,17 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
-        key2: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 0.2830189, g: 0.15147054, b: 0.03470983, a: 1}
+        key1: {r: 0.9433962, g: 0.67347986, b: 0.38863173, a: 1}
+        key2: {r: 0.59607846, g: 0.47058827, b: 0.3254902, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 65535
-        ctime2: 0
+        ctime1: 33025
+        ctime2: 64636
         ctime3: 0
         ctime4: 0
         ctime5: 0
@@ -56365,8 +56364,8 @@ ParticleSystem:
         atime6: 0
         atime7: 0
         m_Mode: 0
-        m_ColorSpace: -1
-        m_NumColorKeys: 2
+        m_ColorSpace: 0
+        m_NumColorKeys: 3
         m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
@@ -58270,19 +58269,66 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3783145162492669615, guid: 6d81d2c5079f5c4499f1f775b4c54390, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8629117041169729674, guid: 6d81d2c5079f5c4499f1f775b4c54390, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2090807030}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7039708625515762780, guid: 6d81d2c5079f5c4499f1f775b4c54390, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 6956141449570862186}
   m_SourcePrefab: {fileID: 100100000, guid: 6d81d2c5079f5c4499f1f775b4c54390, type: 3}
 --- !u!4 &6956141449570862182 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8629117041169729674, guid: 6d81d2c5079f5c4499f1f775b4c54390, type: 3}
   m_PrefabInstance: {fileID: 6956141449570862181}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6956141449570862183 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7039708625515762780, guid: 6d81d2c5079f5c4499f1f775b4c54390, type: 3}
+  m_PrefabInstance: {fileID: 6956141449570862181}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &6956141449570862184 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2536876698833293603, guid: 6d81d2c5079f5c4499f1f775b4c54390, type: 3}
+  m_PrefabInstance: {fileID: 6956141449570862181}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &6956141449570862185 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5150227990506616828, guid: 6d81d2c5079f5c4499f1f775b4c54390, type: 3}
+  m_PrefabInstance: {fileID: 6956141449570862181}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6956141449570862186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6956141449570862183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 508cf5c0413a981459bbf7491c0757d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundParticles: {fileID: 2090807032}
+  speed: 2
+  sprintMod: 3
+  jumpMax: 2
+  jumpSpeed: 10
+  jumpCount: 0
+  acceleration: 10
+  airControl: 0.5
+  coyoteTime: 0.1
+  jumpBufferTime: 0.15
+  maxStamina: 5
+  staminaDrainRate: 2
+  staminaRegenRate: 0.5
+  sprintThreshold: 1
+  footCollider: {fileID: 6956141449570862185}
+  activationCollider: {fileID: 6956141449570862184}
 --- !u!212 &7251410584370372683
 SpriteRenderer:
   m_ObjectHideFlags: 0
