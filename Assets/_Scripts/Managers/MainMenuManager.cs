@@ -1,3 +1,4 @@
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +29,10 @@ public class MainMenuManager : MonoBehaviour
 
     [SerializeField] private GameObject parallaxBG;
 
+    [Header("Volume UI")]
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider sfxVolumeSlider;
+
 
 
     /*
@@ -38,12 +43,16 @@ public class MainMenuManager : MonoBehaviour
     {
         if (isOnMainMenu)
         {
+            AudioManager.Instance.PlayButtonClick();
+
             GameManager.Instance.StartNewGame();
         }
     }
 
     public void OpenMainMenu()
     {
+        AudioManager.Instance.PlayButtonClick();
+
         isOnMainMenu = true;
         isOnOptions = false;
         isOnCredits = false;
@@ -53,10 +62,14 @@ public class MainMenuManager : MonoBehaviour
         optionsPanel.SetActive(false);
         creditsPanel.SetActive(false);
         parallaxBG.SetActive(true);
+
+        AudioManager.Instance.PlayMainMenuMusic();
     }
 
     public void OpenOptions()
     {
+        AudioManager.Instance.PlayButtonClick();
+
         isOnMainMenu = false;
         isOnOptions = true;
         Debug.Log("Options button clicked!");
@@ -64,13 +77,18 @@ public class MainMenuManager : MonoBehaviour
 
     public void OpenCredits()
     {
+        AudioManager.Instance.PlayButtonClick();
+
         isOnMainMenu = false;
         isOnCredits = true;
         Debug.Log("Opened Credits!");
+        AudioManager.Instance.StopMusic();
     }
 
     public void QuitGameToDesktop()
     {
+        AudioManager.Instance.PlayButtonClick();
+
         isOnMainMenu = false;
         // Quit the Application
         GameManager.Instance.QuitGame();
@@ -82,30 +100,50 @@ public class MainMenuManager : MonoBehaviour
     */
     public void ToggleFullScreen()
     {
-        Debug.Log("FullScreen Toggled! NEEDS IMPLEMENTATION...!");
+        AudioManager.Instance.PlayButtonClick();
+        Screen.fullScreen = !Screen.fullScreen;
+        Debug.Log("FullScreen Toggled!)");
     }
+
+    public void OnMusicVolumeChanged(float newValue)
+    {
+        AudioManager.Instance.SetMusicVolume(newValue);
+    }
+
+    public void OnSFXVolumeChanged(float newValue)
+    {
+        AudioManager.Instance.SetSFXVolume(newValue);
+    }
+
 
     private void Awake()
     {
+        AudioManager.Instance.PlayMainMenuMusic();
+
         GameManager.Instance.ShowMenu();
         // Check to see if the gamemanager is currently displaying the main menu
         // If it is go ahead and display the scene
         if (GameManager.Instance.CurrentState == GameManager.GameState.Menu)
         {
             isOnMainMenu = true;
-            if (isOnMainMenu)
-            {
-                mainMenuPanel.SetActive(true);
-
-                optionsPanel.SetActive(false);
-                creditsPanel.SetActive(false);
-
-                parallaxBG.SetActive(true);
-            }
+            mainMenuPanel.SetActive(true);
+            optionsPanel.SetActive(false);
+            creditsPanel.SetActive(false);
+            parallaxBG.SetActive(true);
         }
         else
         {
             isOnMainMenu = false;
+        }
+
+        if (musicVolumeSlider != null)
+        {
+            musicVolumeSlider.value = 1f;
+        }
+
+        if (sfxVolumeSlider != null)
+        {
+            sfxVolumeSlider.value = 1f;
         }
     }
 
@@ -129,6 +167,7 @@ public class MainMenuManager : MonoBehaviour
         if (isOnCredits)
         {
             mainMenuPanel.SetActive(false);
+            AudioManager.Instance.StopMusic();
 
             optionsPanel.SetActive(false);
             creditsPanel.SetActive(true);
