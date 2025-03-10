@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Lamp_2_Japan_0: -3172508026647451956
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
