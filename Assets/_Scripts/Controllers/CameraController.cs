@@ -57,10 +57,15 @@ public class CameraController : MonoBehaviour
     {
         yield return StartCoroutine(SmoothZoom(zoomOutSize));
 
-        while (Vector2.Distance(cam.transform.position, target.position) > 0.1f)
+        Vector3 targetPosition = new Vector3(target.position.x, target.position.y + 1.15f, cam.transform.position.z);
+
+        while (Vector2.Distance(new Vector2(cam.transform.position.x, cam.transform.position.y),
+                                new Vector2(targetPosition.x, targetPosition.y)) > 0.1f)
         {
-            Vector3 newPos = Vector2.Lerp(cam.transform.position, target.position, Time.deltaTime * moveSpeed);
-            cam.transform.position = new Vector3(newPos.x, newPos.y, cam.transform.position.z); // Keep Z constant
+            Vector3 newPos = Vector3.Lerp(cam.transform.position, targetPosition, Time.deltaTime * moveSpeed);
+
+            cam.transform.position = new Vector3(newPos.x, newPos.y, cam.transform.position.z);
+
             yield return null;
         }
 
