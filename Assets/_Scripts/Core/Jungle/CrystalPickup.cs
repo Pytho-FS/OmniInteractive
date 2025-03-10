@@ -8,6 +8,8 @@ public class CrystalPickup : MonoBehaviour
 {
     [SerializeField] public Sprite crystalSprite;
 
+    private bool crystalPickedUp = false;
+
     /// <summary>
     /// Called when another collider enters this object's trigger collider.
     /// If the collider belongs to the Player, add the crystal to the inventory and destroy the crystal.
@@ -22,8 +24,15 @@ public class CrystalPickup : MonoBehaviour
             if (CrystalInventoryManager.Instance != null)
             {
                 CrystalInventoryManager.Instance.AddCrystal(crystalSprite);
-                // Destroy the crystal object afters it's been picked up.
-                Destroy(gameObject);
+
+                MainPillarController.Instance?.PlayInitialEffect();
+
+                crystalPickedUp = true;
+                if (crystalPickedUp)
+                {
+                    // Destroy the crystal object afters it's been picked up.
+                    Destroy(gameObject);
+                }
             }
             else
             {
