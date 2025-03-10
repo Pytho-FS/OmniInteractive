@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerReset : MonoBehaviour
 {
-    private Vector2 initialPosition;
+    private Vector3 initialPosition;
 
     private void Start()
     {

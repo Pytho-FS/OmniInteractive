@@ -19,6 +19,7 @@ public class PortalController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            GameManager.Instance.SetCurrentMiniGame(2);
             GameManager.Instance.LoadScene("Main Scene");
         }
     }

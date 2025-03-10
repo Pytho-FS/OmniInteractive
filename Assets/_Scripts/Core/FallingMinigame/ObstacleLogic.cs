@@ -7,10 +7,10 @@ public class ObstacleLogic : MonoBehaviour
 
     [SerializeField] float speed;
 
-    private Vector2 origPosition;
+    private Vector3 origPosition;
     void Start()
     {
-        speed = 0.01f ;
+        speed = 0.01f;
         origPosition = transform.position;
     }
 
@@ -26,17 +26,18 @@ public class ObstacleLogic : MonoBehaviour
     public void OnChildCollision(ObstacleChild child)
     {
         Debug.Log("Player touched obstacle!");
+
         StartCoroutine(DieScreen());
     }
 
     private IEnumerator DieScreen()
     {
         speed = 0;
-        GetComponent<SmoothOpacity>().FadeDieScreen(1f, true);
+        FadeDieScreen(1f, true);
 
         yield return new WaitForSeconds(2);
 
-        GetComponent<SmoothOpacity>().FadeDieScreen(1f, false);
+        FadeDieScreen(1f, false);
         this.gameObject.transform.position = origPosition;
 
         GameObject.Find("Sprite-Jumper").GetComponent<PlayerReset>().ResetPosition();
@@ -45,4 +46,24 @@ public class ObstacleLogic : MonoBehaviour
 
         speed = 0.01f;
     }
+
+    public void FadeDieScreen(float targetAlpha, bool fadeIn)
+    {
+        GameObject dieScreenObj = GameObject.Find("DieScreen");
+
+        if (dieScreenObj != null)
+        {
+            SpriteRenderer sr = dieScreenObj.GetComponent<SpriteRenderer>();
+            if (sr != null)
+            {
+                StartCoroutine(GetComponent<SmoothOpacity>().FadeRoutine(sr, targetAlpha, fadeIn));
+            }
+            else
+            {
+                Debug.LogWarning($"DieScreen not found!");
+            }
+        }
+    }
+
+    public float Speed()   { return speed; }
 }

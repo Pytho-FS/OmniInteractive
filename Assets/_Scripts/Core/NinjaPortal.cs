@@ -10,7 +10,7 @@ public class NinjaPortal : MonoBehaviour
     {
         if (collision.CompareTag("Player") && GameManager.Instance.totalNinjas == 0)
         {
-            //GameManager.Instance.GetCurrentMiniGame() +=1;
+            GameManager.Instance.SetCurrentMiniGame(1);
             GameManager.Instance.LoadScene("Main Scene");
         }
     }
