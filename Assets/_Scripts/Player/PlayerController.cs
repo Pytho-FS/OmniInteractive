@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] BoxCollider2D footCollider;
     [SerializeField] BoxCollider2D activationCollider;
     float currentStamina;
+    public float CurrentStamina => currentStamina;
     Vector2 lastMoveDirection = Vector2.right;
     Vector2 moveDir;
     Vector2 playerVelocity;
@@ -75,7 +76,13 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             jumpCount++;
-
+            //if horizontal is not pressed, set x velocity to 0 if jumping and grounded
+            if (!Input.GetButton("Horizontal") && footCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            {
+                rb.linearVelocityX = 0.0f;
+                rb.angularVelocity = 0f;
+            }
+            
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpSpeed);
 
         }

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Kids_sleeping_temp_0: 2136818055860541616
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
