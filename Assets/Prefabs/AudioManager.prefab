@@ -49,8 +49,19 @@ MonoBehaviour:
   musicSource: {fileID: 7025683000528860615}
   sfxSource: {fileID: 7412276954124090937}
   mainMenuMusic: {fileID: 8300000, guid: 378a9c91df393704986456cbbcb40d25, type: 3}
+  ninjaMusic: {fileID: 8300000, guid: 88a5a38ceed74974ab0f6a2e4e8b2aed, type: 3}
+  jungleMusic: {fileID: 8300000, guid: dcbdb7633988e864c9f490e643e41e4d, type: 3}
+  fallingMusic: {fileID: 8300000, guid: 904f5e0d387fd6742913f45ab92b42f9, type: 3}
+  creditsMusic: {fileID: 8300000, guid: d4e54345d94c132449c3c8fa67bccef5, type: 3}
   buttonClickSFX: {fileID: 8300000, guid: c11fc06dd6e0d5a4caec24b57b08e9ba, type: 3}
   playerJumpSFX: {fileID: 8300000, guid: d977e341906a42241a189e1256f29c78, type: 3}
+  crystalDropSFX: {fileID: 8300000, guid: 7b9b4f34037776a4d8714717a7a9981d, type: 3}
+  crystalPickupSFX: {fileID: 8300000, guid: 2e5330c8c12e78f4696602a207925cd5, type: 3}
+  portalSoundSFX: {fileID: 8300000, guid: 1352ae6d7327ac94493af3e091079598, type: 3}
+  windSoundSFX: {fileID: 8300000, guid: 711efcfe1d5e34a41a0fdaf97a3537b0, type: 3}
+  musicVolume: 1
+  sfxVolume: 1
+  volumeExponent: 2
 --- !u!82 &7025683000528860615
 AudioSource:
   m_ObjectHideFlags: 0
@@ -66,11 +77,11 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 40
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -160,8 +171,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

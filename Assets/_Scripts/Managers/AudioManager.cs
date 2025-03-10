@@ -18,6 +18,10 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioClip buttonClickSFX;
     [SerializeField] private AudioClip playerJumpSFX;
+    [SerializeField] private AudioClip crystalDropSFX;
+    [SerializeField] private AudioClip crystalPickupSFX;
+    [SerializeField] private AudioClip portalSoundSFX;
+    [SerializeField] private AudioClip windSoundSFX;
 
     [SerializeField] private float musicVolume = 1f;
     [SerializeField] private float sfxVolume = 1f;
@@ -131,6 +135,27 @@ public class AudioManager : MonoBehaviour
     public void PlayButtonClick()
     {
         PlaySFX(buttonClickSFX);
+    }
+
+    public void PlayCrystalPickup()
+    {
+        PlaySFX(crystalPickupSFX);
+    }
+
+    public void DropCrystalSkull()
+    {
+        PlaySFX(crystalDropSFX);
+    }
+
+    public void PlayWinSound()
+    {
+        if (sfxSource != null && playerJumpSFX != null)
+        {
+            float originalPitch = sfxSource.pitch;
+            sfxSource.pitch = Random.Range(jumpPitchMin, jumpPitchMax);
+            sfxSource.PlayOneShot(playerJumpSFX, sfxVolumeAdjusted());
+            sfxSource.pitch = originalPitch;
+        }
     }
 
     public void PlayPlayerJump()
