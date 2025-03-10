@@ -1740,6 +1740,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1240322718}
   particleSys: {fileID: 1240322723}
+  initialMsg: {fileID: 7374290263024358570}
+  finalMsg: {fileID: 1866854416567747161}
 --- !u!58 &1240322721
 CircleCollider2D:
   m_ObjectHideFlags: 0
